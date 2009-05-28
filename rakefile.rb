@@ -24,12 +24,10 @@ task :publish_rdoc => [:rdoc] do
   Rake::SshDirPublisher.new("jaycfields@rubyforge.org", "/var/www/gforge-projects/validatable", "doc").upload
 end
 
-Gem::manage_gems
-
 specification = Gem::Specification.new do |s|
 	s.name   = "validatable"
   s.summary = "Validatable is a library for adding validations."
-	s.version = "1.6.7"
+	s.version = "1.7.0"
 	s.author = 'Jay Fields'
 	s.description = "Validatable is a library for adding validations."
 	s.email = 'validatable-developer@rubyforge.org'
