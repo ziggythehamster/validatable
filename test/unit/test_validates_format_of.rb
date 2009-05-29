@@ -13,6 +13,16 @@ Expectations do
   end
   
   expect true do
+    validation = Validatable::ValidatesFormatOf.new stub_everything, :name, :with => /book/, :allow_nil => true
+    validation.valid?(stub(:name=>nil))
+  end
+  
+  expect true do
+    validation = Validatable::ValidatesFormatOf.new stub_everything, :name, :with => /book/, :allow_blank => true
+    validation.valid?(stub(:name=>''))
+  end
+  
+  expect true do
     validation = Validatable::ValidatesFormatOf.new stub_everything, :age, :with => /14/
     validation.valid?(stub(:age=>14))
   end

@@ -7,10 +7,22 @@ Expectations do
     instance = stub(:username=>"username", :username_confirmation=>"username")
     validation.valid?(instance)
   end
-  
+    
   expect false do
     validation = Validatable::ValidatesConfirmationOf.new stub_everything, :username
     instance = stub(:username=>"username", :username_confirmation=>"usessrname")
+    validation.valid?(instance)
+  end
+
+  expect true do
+    validation = Validatable::ValidatesConfirmationOf.new stub_everything, :username, :allow_nil => true
+    instance = stub(:username=>"username", :username_confirmation=>nil)
+    validation.valid?(instance)
+  end
+  
+  expect true do
+    validation = Validatable::ValidatesConfirmationOf.new stub_everything, :username, :allow_blank => true
+    instance = stub(:username=>"username", :username_confirmation=>'')
     validation.valid?(instance)
   end
   

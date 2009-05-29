@@ -1,7 +1,10 @@
 module Validatable
-  class ValidatesAcceptanceOf < ValidationBase #:nodoc:
+  class ValidatesAcceptanceOf < ValidationBase #:nodoc:    
     def valid?(instance)
-      instance.send(self.attribute) == "true"
+      value = instance.send(self.attribute)
+      return true if allow_nil && value.nil?
+      return true if allow_blank && value.blank?
+      %w(1 true t).include?(value)
     end
     
     def message(instance)

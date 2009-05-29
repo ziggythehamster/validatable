@@ -1,6 +1,6 @@
 module Validatable
   class ValidatesLengthOf < ValidationBase #:nodoc:
-    option :minimum, :maximum, :is, :within, :allow_nil
+    option :minimum, :maximum, :is, :within
     
     def message(instance)
       super || "is invalid"
@@ -12,7 +12,12 @@ module Validatable
       
       if value.nil?
         return true if allow_nil
-        value = ""
+        value = ''
+      end
+
+      if value.blank?
+        return true if allow_blank
+        value = ''
       end
       
       valid &&= value.length <= maximum unless maximum.nil? 

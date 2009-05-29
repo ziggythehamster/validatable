@@ -13,6 +13,16 @@ Expectations do
   end
   
   expect true do
+    validation = Validatable::ValidatesPresenceOf.new stub_everything, :name, :allow_nil => true
+    validation.valid?(stub(:name=>nil))
+  end
+  
+  expect true do
+    validation = Validatable::ValidatesPresenceOf.new stub_everything, :name, :allow_blank => true
+    validation.valid?(stub(:name=>''))
+  end
+  
+  expect true do
     validation = Validatable::ValidatesPresenceOf.new stub_everything, :employee
     validation.valid?(stub(:employee => stub(:nil? => false)))
   end

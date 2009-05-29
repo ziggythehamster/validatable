@@ -60,10 +60,15 @@ Expectations do
     validation.valid?(instance)
   end
 
-
   expect true do
     validation = Validatable::ValidatesLengthOf.new stub_everything, :username, :within => 2..4, :allow_nil => true
     instance = stub(:username => nil)
+    validation.valid?(instance)
+  end
+  
+  expect true do
+    validation = Validatable::ValidatesLengthOf.new stub_everything, :username, :within => 2..4, :allow_blank => true
+    instance = stub(:username => '')
     validation.valid?(instance)
   end
   

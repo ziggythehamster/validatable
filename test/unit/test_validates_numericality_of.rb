@@ -15,6 +15,18 @@ Expectations do
   end  
  
   expect true do
+    validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_int, :allow_nil => true
+    instance = stub(:some_int => nil)
+    validation.valid?(instance)
+  end  
+ 
+  expect true do
+    validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_int, :allow_blank => true
+    instance = stub(:some_int => '')
+    validation.valid?(instance)
+  end  
+ 
+  expect true do
     validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_decimal
     instance = stub(:some_decimal => 1.23)
     validation.valid?(instance)

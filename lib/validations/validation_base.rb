@@ -1,47 +1,45 @@
 module Validatable
   class ValidationBase #:nodoc:
-    class << self
-      def required_option(*args)
-        option(*args)
-        requires(*args)
-      end
-      
-      def option(*args)
-        attr_accessor(*args)
-        understands(*args)
-      end
-      
-      def default(hash)
-        defaults.merge! hash
-      end
-      
-      def defaults
-        @defaults ||= {}
-      end
-      
-      def all_defaults
-        return defaults.merge(self.superclass.all_defaults) if self.superclass.respond_to? :all_defaults
-        defaults
-      end
-      
-      def after_validate(&block)
-        after_validations << block
-      end
-      
-      def after_validations
-        @after_validations ||= []
-      end
-      
-      def all_after_validations
-        return after_validations + self.superclass.all_after_validations if self.superclass.respond_to? :all_after_validations
-        after_validations
-      end
+    def self.required_option(*args)
+      option(*args)
+      requires(*args)
+    end
+    
+    def self.option(*args)
+      attr_accessor(*args)
+      understands(*args)
+    end
+    
+    def self.default(hash)
+      defaults.merge! hash
+    end
+    
+    def self.defaults
+      @defaults ||= {}
+    end
+    
+    def self.all_defaults
+      return defaults.merge(self.superclass.all_defaults) if self.superclass.respond_to? :all_defaults
+      defaults
+    end
+    
+    def self.after_validate(&block)
+      after_validations << block
+    end
+    
+    def self.after_validations
+      @after_validations ||= []
+    end
+    
+    def self.all_after_validations
+      return after_validations + self.superclass.all_after_validations if self.superclass.respond_to? :all_after_validations
+      after_validations
     end
 
     include Understandable
     include Requireable
     
-    option :message, :if, :times, :level, :groups, :key, :after_validate
+    option :message, :if, :times, :level, :groups, :key, :after_validate, :allow_nil, :allow_blank
     default :level => 1, :groups => []
     attr_accessor :attribute
     

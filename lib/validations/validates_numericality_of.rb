@@ -3,7 +3,11 @@ module Validatable
     option :only_integer
     
     def valid?(instance)
-      value = instance.send(self.attribute).to_s
+      value = instance.send(self.attribute)
+      return true if allow_nil && value.nil?
+      return true if allow_blank && value.blank?
+      
+      value = value.to_s
       regex = self.only_integer ? /\A[+-]?\d+\Z/ : /^\d*\.{0,1}\d+$/
       not (value =~ regex).nil?
     end
