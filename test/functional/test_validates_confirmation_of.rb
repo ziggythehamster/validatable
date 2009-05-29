@@ -5,7 +5,7 @@ module Functional
     test "given non matching attributes, when validated, then error is in the objects error collection" do
       klass = Class.new do
         include Validatable
-        attr_accessor :name, :name_confirmation
+        attr_accessor :name
         validates_confirmation_of :name
       end
       instance = klass.new
@@ -18,7 +18,7 @@ module Functional
     test "given matching attributes, when validated, then no error is in the objects error collection" do
       klass = Class.new do
         include Validatable
-        attr_accessor :name, :name_confirmation
+        attr_accessor :name
         validates_confirmation_of :name
       end
       instance = klass.new
@@ -30,7 +30,7 @@ module Functional
     test "given matching attributes of different case, when validated with case sensitive false, then no error is in the objects error collection" do
       klass = Class.new do
         include Validatable
-        attr_accessor :name, :name_confirmation
+        attr_accessor :name
         validates_confirmation_of :name, :case_sensitive => false
       end
       instance = klass.new
@@ -42,7 +42,7 @@ module Functional
     test "given matching attributes of different case, when validated with case sensitive true, then error is in the objects error collection" do
       klass = Class.new do
         include Validatable
-        attr_accessor :name, :name_confirmation
+        attr_accessor :name
         validates_confirmation_of :name
       end
       instance = klass.new

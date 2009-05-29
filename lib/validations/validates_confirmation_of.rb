@@ -3,6 +3,11 @@ module Validatable
     option :case_sensitive
     default :case_sensitive => true
     
+    def initialize(klass, attribute, options={})
+      klass.class_eval { attr_accessor "#{attribute}_confirmation" }
+      super
+    end
+    
     def valid?(instance)
       confirmation_value = instance.send("#{self.attribute}_confirmation")
       return true if allow_nil && confirmation_value.nil?
