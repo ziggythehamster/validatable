@@ -14,6 +14,18 @@ Expectations do
     validation.valid?(instance)
   end  
  
+  expect false do
+    validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_int
+    instance = stub(:some_int => 0, :some_int_before_typecast => 'string')
+    validation.valid?(instance)
+  end  
+  
+  expect true do
+    validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_int
+    instance = stub(:some_int => 21, :some_int_before_typecast => '21')
+    validation.valid?(instance)
+  end  
+ 
   expect true do
     validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_int, :allow_nil => true
     instance = stub(:some_int => nil)
