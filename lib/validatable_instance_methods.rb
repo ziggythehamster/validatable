@@ -2,6 +2,10 @@ module Validatable
   def self.included(klass) #:nodoc:
     klass.extend Validatable::ClassMethods
     klass.extend Validatable::Macros
+    klass.class_eval do
+      include ActiveSupport::Callbacks
+      define_callbacks :validate, :validate_on_create, :validate_on_update
+    end
   end
   
   # call-seq: valid?
@@ -21,8 +25,14 @@ module Validatable
   def valid_for_group?(group) #:nodoc:
     run_before_validations
     errors.clear
+    run_callbacks(:validate)
+    
+    if respond_to?(:new?)
+      new? ? run_callbacks(:validate_on_create) : run_callbacks(:validate_on_update)
+    end
+    
     self.class.validate_children(self, group)
-    self.validate(group)
+    self.validate_group(group)
     errors.empty?
   end
   
@@ -61,7 +71,7 @@ module Validatable
     @times_validated_hash ||= {}
   end
 
-  def validate(group) #:nodoc:
+  def validate_group(group) #:nodoc:
     validation_levels.each do |level|
       validations_for_level_and_group(level, group).each do |validation|
         run_validation(validation) if validation.should_validate?(self)
