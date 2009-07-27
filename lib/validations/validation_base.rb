@@ -68,7 +68,7 @@ module Validatable
           result &&= instance.instance_eval(&self.if)
         when Symbol, String
           result &&= instance.instance_eval(self.if.to_s)
-        end
+      end
       result
     end
     

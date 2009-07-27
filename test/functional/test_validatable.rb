@@ -255,6 +255,42 @@ functional_tests do
     instance = klass.new
     instance.valid?
   end
+  
+  test ':if with symbol should work' do
+    klass = Class.new do
+      include Validatable
+      attr_accessor :name, :name_required
+      validates_presence_of :name, :if => :name_required?
+      
+      def name_required?
+        name_required
+      end
+    end
+    instance = klass.new
+    instance.name_required = false
+    assert instance.valid?
+    instance.name_required = true
+    assert !instance.valid?
+    assert_equal "can't be empty", instance.errors.on(:name)
+  end
+  
+  test ':if with string should work' do
+    klass = Class.new do
+      include Validatable
+      attr_accessor :name, :name_required
+      validates_presence_of :name, :if => 'name_required?'
+      
+      def name_required?
+        name_required
+      end
+    end
+    instance = klass.new
+    instance.name_required = false
+    assert instance.valid?
+    instance.name_required = true
+    assert !instance.valid?
+    assert_equal "can't be empty", instance.errors.on(:name)
+  end
 
   test "classes only have valid_for_* methods for groups that appear in their validations" do
     class_with_group_one = Class.new do
