@@ -63,7 +63,12 @@ module Validatable
     
     def should_validate?(instance)
       result = validate_this_time?(instance)
-      result &&= instance.instance_eval(&self.if) unless self.if.nil?
+      case self.if
+        when Proc
+          result &&= instance.instance_eval(&self.if)
+        when Symbol, String
+          result &&= instance.instance_eval(self.if.to_s)
+        end
       result
     end
     
