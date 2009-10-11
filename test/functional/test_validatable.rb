@@ -138,7 +138,53 @@ functional_tests do
     instance.valid?
     instance.errors.on(:address)
   end
+  
+  expect "is invalid" do
+    child_class = Class.new do
+      include Validatable
+      attr_accessor :name, :address
+      validates_presence_of :name
+      validates_format_of :address, :with => /.+/
+    end
+    klass = Class.new do
+      include Validatable
+      include_errors_from :child 
+      define_method :child do
+        valid_child = child_class.new
+        valid_child.name = "nom de plume"
+        valid_child.address = "nowhere"
+        [valid_child, child_class.new]
+      end
+    end
+    instance = klass.new
+    instance.valid?
+    instance.errors.on(:address)
+  end
 
+  expect true do
+    child_class = Class.new do
+      include Validatable
+      attr_accessor :name, :address
+      validates_presence_of :name
+      validates_format_of :address, :with => /.+/
+    end
+    klass = Class.new do
+      include Validatable
+      include_errors_from :child 
+      define_method :child do
+        valid_child = child_class.new
+        valid_child.name = "nom de plume"
+        valid_child.address = "nowhere"
+        also_valid = child_class.new
+        also_valid.name = "nom de guerre"
+        also_valid.address = "somewhere else"
+        [valid_child, valid_child]
+      end
+    end
+    instance = klass.new
+    instance.valid?
+  end
+  
   expect "can't be empty" do
     child_class = Class.new do
       include Validatable

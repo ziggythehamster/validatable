@@ -4,18 +4,20 @@ module Validatable
     def validate_children(instance, group)
       self.children_to_validate.each do |child_validation|
         next unless child_validation.should_validate?(instance)
-        child = instance.send child_validation.attribute
-        if (child.respond_to?(:valid_for_group?))
-          child.valid_for_group?(group)
-        else
-          child.valid?
-        end
-        child.errors.each do |attribute, messages|
-          if messages.is_a?(String)
-            add_error(instance, child_validation.map[attribute.to_sym] || attribute, messages)
+        child_or_children = instance.send child_validation.attribute
+        [child_or_children].flatten.each do |child|
+          if (child.respond_to?(:valid_for_group?))
+            child.valid_for_group?(group)
           else
-            messages.each do |message|
-              add_error(instance, child_validation.map[attribute.to_sym] || attribute, message)
+            child.valid?
+          end
+          child.errors.each do |attribute, messages|
+            if messages.is_a?(String)
+              add_error(instance, child_validation.map[attribute.to_sym] || attribute, messages)
+            else
+              messages.each do |message|
+                add_error(instance, child_validation.map[attribute.to_sym] || attribute, message)
+              end
             end
           end
         end
