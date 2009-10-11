@@ -4,7 +4,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "validatable"
+    gem.name = "jnunemaker-validatable"
     gem.summary = %Q{Validatable is a library for adding validations.}
     gem.email = "nunemaker@gmail.com"
     gem.homepage = "http://github.com/jnunemaker/validatable"
