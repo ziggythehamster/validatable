@@ -2,13 +2,11 @@
 
 Validatable is a library for adding validations.
 
-by Jay[http://jayfields.blogspot.com] Fields[http://jayfields.blogspot.com]
+Created by Jay Fields, updated by John Nunemaker
 
-== Download and Installation
-
-You can download Validatable from here[http://rubyforge.org/projects/validatable] or install it with the following command.
-
- $ gem install validatable
+== Installation
+ 
+ $ gem install jnunemaker-validatable -s http://gemcutter.org
 
 == License
  	
