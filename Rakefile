@@ -11,6 +11,8 @@ Jeweler::Tasks.new do |gem|
   gem.files    = FileList['lib/**/*.rb', '[A-Z]*', 'test/**/*'].to_a
 end
 
+Jeweler::GemcutterTasks.new
+
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
   test.libs << 'test'
