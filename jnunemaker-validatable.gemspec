@@ -9,7 +9,8 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jay Fields", "John Nunemaker"]
-  s.date = %q{2009-10-21}
+  s.date = %q{2009-11-01}
+  s.description = %q{Validatable is a library for adding validations.}
   s.email = %q{nunemaker@gmail.com}
   s.extra_rdoc_files = [
     "README.rdoc"
@@ -32,7 +33,9 @@ Gem::Specification.new do |s|
      "lib/validatable/validations/validates_associated.rb",
      "lib/validatable/validations/validates_confirmation_of.rb",
      "lib/validatable/validations/validates_each.rb",
+     "lib/validatable/validations/validates_exclusion_of.rb",
      "lib/validatable/validations/validates_format_of.rb",
+     "lib/validatable/validations/validates_inclusion_of.rb",
      "lib/validatable/validations/validates_length_of.rb",
      "lib/validatable/validations/validates_numericality_of.rb",
      "lib/validatable/validations/validates_presence_of.rb",
@@ -43,7 +46,9 @@ Gem::Specification.new do |s|
      "test/functional/test_validates_associated.rb",
      "test/functional/test_validates_confirmation_of.rb",
      "test/functional/test_validates_each.rb",
+     "test/functional/test_validates_exclusion_of.rb",
      "test/functional/test_validates_format_of.rb",
+     "test/functional/test_validates_inclusion_of.rb",
      "test/functional/test_validates_length_of.rb",
      "test/functional/test_validates_numericality_of.rb",
      "test/functional/test_validates_presence_of.rb",
@@ -55,7 +60,9 @@ Gem::Specification.new do |s|
      "test/unit/test_validates_acceptance_of.rb",
      "test/unit/test_validates_associated.rb",
      "test/unit/test_validates_confirmation_of.rb",
+     "test/unit/test_validates_exclusion_of.rb",
      "test/unit/test_validates_format_of.rb",
+     "test/unit/test_validates_inclusion_of.rb",
      "test/unit/test_validates_length_of.rb",
      "test/unit/test_validates_numericality_of.rb",
      "test/unit/test_validates_presence_of.rb",
@@ -73,7 +80,9 @@ Gem::Specification.new do |s|
      "test/functional/test_validates_associated.rb",
      "test/functional/test_validates_confirmation_of.rb",
      "test/functional/test_validates_each.rb",
+     "test/functional/test_validates_exclusion_of.rb",
      "test/functional/test_validates_format_of.rb",
+     "test/functional/test_validates_inclusion_of.rb",
      "test/functional/test_validates_length_of.rb",
      "test/functional/test_validates_numericality_of.rb",
      "test/functional/test_validates_presence_of.rb",
@@ -85,7 +94,9 @@ Gem::Specification.new do |s|
      "test/unit/test_validates_acceptance_of.rb",
      "test/unit/test_validates_associated.rb",
      "test/unit/test_validates_confirmation_of.rb",
+     "test/unit/test_validates_exclusion_of.rb",
      "test/unit/test_validates_format_of.rb",
+     "test/unit/test_validates_inclusion_of.rb",
      "test/unit/test_validates_length_of.rb",
      "test/unit/test_validates_numericality_of.rb",
      "test/unit/test_validates_presence_of.rb",
