@@ -193,6 +193,14 @@ module Validatable
     def validates_true_for(*args)
       add_validations(args, ValidatesTrueFor)
     end
+    
+    def validates_exclusion_of(*args)
+      add_validations(args, ValidatesExclusionOf)
+    end
+
+    def validates_inclusion_of(*args)
+      add_validations(args, ValidatesInclusionOf)
+    end
 
     # call-seq: validates_associated(*args)
     #
