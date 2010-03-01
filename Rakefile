@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'rake'
 
+require File.dirname(__FILE__) + '/lib/validatable'
+
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   gem.name        = "jnunemaker-validatable"
@@ -10,6 +12,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage    = "http://github.com/jnunemaker/validatable"
   gem.authors     = ['Jay Fields', 'John Nunemaker']
   gem.files       = FileList['lib/**/*.rb', '[A-Z]*', 'test/**/*'].to_a
+  gem.version     = Validatable::Version
 end
 
 Jeweler::GemcutterTasks.new
