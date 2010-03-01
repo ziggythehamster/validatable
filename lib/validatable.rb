@@ -24,5 +24,5 @@ require 'validatable/validations/validates_each'
 require 'validatable/validations/validates_associated'
 
 module Validatable
-  Version = '1.1.9'
+  Version = '1.1.10'
 end
