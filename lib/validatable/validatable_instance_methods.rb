@@ -19,8 +19,8 @@ module Validatable
   end
   
   def valid_for_group?(group) #:nodoc:
-    run_before_validations
     errors.clear
+    run_before_validations
     self.class.validate_children(self, group)
     self.validate_group(group)
     errors.empty?
