@@ -1,5 +1,5 @@
 require 'forwardable'
-require 'active_support'
+require 'active_support/all'
 
 require 'validatable/object_extension'
 require 'validatable/errors'
