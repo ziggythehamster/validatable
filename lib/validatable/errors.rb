@@ -20,7 +20,7 @@ module Validatable
     end
 
     # call-seq: on(attribute)
-    # 
+    #
     # * Returns nil, if no errors are associated with the specified +attribute+.
     # * Returns the error message, if one error is associated with the specified +attribute+.
     # * Returns an array of error messages, if more than one error is associated with the specified +attribute+.
@@ -28,8 +28,11 @@ module Validatable
       return nil if errors[attribute.to_sym].nil?
       errors[attribute.to_sym].size == 1 ? errors[attribute.to_sym].first : errors[attribute.to_sym]
     end
-    
-    alias [] on
+
+    # Rails 3 API for errors, always return array.
+    def [](attribute)
+      errors[attribute.to_sym] || []
+    end
 
     def add(attribute, message) #:nodoc:
       errors[attribute.to_sym] = [] if errors[attribute.to_sym].nil?
@@ -42,19 +45,19 @@ module Validatable
     end
 
     # call-seq: replace(attribute)
-    # 
+    #
     # * Replaces the errors value for the given +attribute+
     def replace(attribute, value)
       errors[attribute.to_sym] = value
     end
 
     # call-seq: raw(attribute)
-    # 
+    #
     # * Returns an array of error messages associated with the specified +attribute+.
     def raw(attribute)
       errors[attribute.to_sym]
     end
-    
+
     def errors #:nodoc:
       @errors ||= {}
     end
@@ -64,7 +67,7 @@ module Validatable
     end
 
     # call-seq: full_messages -> an_array_of_messages
-    # 
+    #
     # Returns an array containing the full list of error messages.
     def full_messages
       full_messages = []
@@ -82,7 +85,7 @@ module Validatable
       end
       full_messages
     end
-    
+
     def humanize(lower_case_and_underscored_word) #:nodoc:
       lower_case_and_underscored_word.to_s.gsub(/_id$/, "").gsub(/_/, " ").capitalize
     end
