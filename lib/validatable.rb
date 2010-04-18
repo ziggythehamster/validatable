@@ -1,5 +1,11 @@
+# gem 'activesupport', '2.3.5'
+
+begin
+  require 'active_support/core_ext/object/blank' # newer versions of active_support (>= 3.0)
+rescue LoadError => e
+  require 'active_support/all' # support older versions of active_support (<= 2.3.5)
+end
 require 'forwardable'
-require 'active_support/all'
 
 require 'validatable/object_extension'
 require 'validatable/errors'
