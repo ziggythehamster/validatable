@@ -1,7 +1,7 @@
+require 'set'
 require 'test/unit'
 require 'mocha'
 require 'dust'
-require 'set'
 require 'expectations'
 
 require File.expand_path(File.dirname(__FILE__) + '/../lib/validatable')
@@ -16,12 +16,6 @@ class << Test::Unit::TestCase
         assert_equal expected_value, ex.class
       end
     end 
-  end
-end
-
-class Test::Unit::TestCase
-  def assert_array_equal a, b
-    assert_equal Set.new(a), Set.new(b)
   end
 end
 
