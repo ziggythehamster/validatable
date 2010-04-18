@@ -19,6 +19,19 @@ module Validatable
       !@errors[attribute.to_sym].nil?
     end
 
+    # Adds an error to the base object instead of any particular attribute. This is used
+    # to report errors that don't tie to any specific attribute, but rather to the object
+    # as a whole. These error messages don't get prepended with any field name when iterating
+    # with +each_full+, so they should be complete sentences.
+    def add_to_base(msg)
+      add(:base, msg)
+    end
+
+    # Returns errors assigned to the base object through +add_to_base+ according to the normal rules of <tt>on(attribute)</tt>.
+    def on_base
+      on(:base)
+    end    
+
     # call-seq: on(attribute)
     #
     # * Returns nil, if no errors are associated with the specified +attribute+.

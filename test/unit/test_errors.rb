@@ -7,6 +7,12 @@ Expectations do
     errors.on(:attribute)
   end
   
+  expect "message" do
+    errors = Validatable::Errors.new
+    errors.add_to_base("message")
+    errors.on_base
+  end
+  
   expect ["message"] do
     errors = Validatable::Errors.new
     errors.add(:attribute, "message")
