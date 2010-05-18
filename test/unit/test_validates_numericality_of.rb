@@ -55,7 +55,79 @@ Expectations do
     instance = stub(:some_negative_number => "-1")
     validation.valid?(instance)
   end
-  
+
+  expect true do
+    validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_number, :less_than => 10
+    instance = stub(:some_number => "9")
+    validation.valid?(instance)
+  end
+
+  expect false do
+    validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_number, :less_than => 10
+    instance = stub(:some_number => "10")
+    validation.valid?(instance)
+  end
+
+  expect false do
+    validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_number, :less_than => 10
+    instance = stub(:some_number => "11")
+    validation.valid?(instance)
+  end
+
+  expect true do
+    validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_number, :less_than_or_equal_to => 10
+    instance = stub(:some_number => "9")
+    validation.valid?(instance)
+  end
+
+  expect true do
+    validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_number, :less_than_or_equal_to => 10
+    instance = stub(:some_number => "10")
+    validation.valid?(instance)
+  end
+
+  expect false do
+    validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_number, :less_than_or_equal_to => 10
+    instance = stub(:some_number => "11")
+    validation.valid?(instance)
+  end
+
+  expect false do
+    validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_number, :greater_than => 10
+    instance = stub(:some_number => "9")
+    validation.valid?(instance)
+  end
+
+  expect false do
+    validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_number, :greater_than => 10
+    instance = stub(:some_number => "10")
+    validation.valid?(instance)
+  end
+
+  expect true do
+    validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_number, :greater_than => 10
+    instance = stub(:some_number => "11")
+    validation.valid?(instance)
+  end
+
+  expect false do
+    validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_number, :greater_than_or_equal_to => 10
+    instance = stub(:some_number => "9")
+    validation.valid?(instance)
+  end
+
+  expect true do
+    validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_number, :greater_than_or_equal_to => 10
+    instance = stub(:some_number => "10")
+    validation.valid?(instance)
+  end
+
+  expect true do
+    validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_number, :greater_than_or_equal_to => 10
+    instance = stub(:some_number => "11")
+    validation.valid?(instance)
+  end
+
   expect false do
     validation = Validatable::ValidatesNumericalityOf.new stub_everything, :some_non_numeric
     instance = stub(:some_non_numeric => "50F")
@@ -69,7 +141,7 @@ Expectations do
   end
   
   expect true do
-    options = [:message, :if, :times, :level, :groups, :only_integer]
+    options = [:message, :if, :times, :level, :groups, :only_integer, :less_than, :less_than_or_equal_to, :greater_than, :greater_than_or_equal_to]
     Validatable::ValidatesNumericalityOf.new(stub_everything, :test).must_understand(options.to_blank_options_hash)
   end
   
