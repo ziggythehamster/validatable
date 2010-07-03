@@ -16,6 +16,7 @@ module Validatable
     #     * after_validate - A block that executes following the run of a validation
     #     * group - The group that this validation belongs to.  A validation can belong to multiple groups
     #     * if - A block that when executed must return true of the validation will not occur
+    #     * unless - A block that prevents validation when it is true
     #     * level - The level at which the validation should occur
     #     * logic - A block that executes to perform the validation
     #     * message - The message to add to the errors collection when the validation fails
@@ -43,6 +44,7 @@ module Validatable
     #     * times - The number of times the validation applies
     #     * level - The level at which the validation should occur
     #     * if - A block that when executed must return true of the validation will not occur
+    #     * unless - A block that prevents validation when it is true
     #     * with - The regular expression used to validate the format
     #     * group - The group that this validation belongs to.  A validation can belong to multiple groups
     def validates_format_of(*args)
@@ -66,6 +68,7 @@ module Validatable
     #     * times - The number of times the validation applies
     #     * level - The level at which the validation should occur
     #     * if - A block that when executed must return true of the validation will not occur
+    #     * unless - A block that prevents validation when it is true
     #     * minimum - The minimum size of the attribute
     #     * maximum - The maximum size of the attribute
     #     * is - The size the attribute must be
@@ -91,6 +94,7 @@ module Validatable
     #     * times - The number of times the validation applies
     #     * level - The level at which the validation should occur
     #     * if - A block that when executed must return true of the validation will not occur
+    #     * unless - A block that prevents validation when it is true
     #     * group - The group that this validation belongs to.  A validation can belong to multiple groups
     #     * only_integer - Whether the attribute must be an integer (default is false)
     def validates_numericality_of(*args)
@@ -114,6 +118,7 @@ module Validatable
     #     * times - The number of times the validation applies
     #     * level - The level at which the validation should occur
     #     * if - A block that when executed must return true of the validation will not occur
+    #     * unless - A block that prevents validation when it is true
     #     * group - The group that this validation belongs to.  A validation can belong to multiple groups
     def validates_acceptance_of(*args)
       add_validations(args, ValidatesAcceptanceOf)
@@ -142,6 +147,7 @@ module Validatable
     #     * times - The number of times the validation applies
     #     * level - The level at which the validation should occur
     #     * if - A block that when executed must return true of the validation will not occur
+    #     * unless - A block that prevents validation when it is true
     #     * group - The group that this validation belongs to.  A validation can belong to multiple groups
     def validates_confirmation_of(*args)
       add_validations(args, ValidatesConfirmationOf)
@@ -165,6 +171,7 @@ module Validatable
     #     * times - The number of times the validation applies
     #     * level - The level at which the validation should occur
     #     * if - A block that when executed must return true of the validation will not occur
+    #     * unless - A block that prevents validation when it is true
     #     * group - The group that this validation belongs to.  A validation can belong to multiple groups
     def validates_presence_of(*args)
       add_validations(args, ValidatesPresenceOf)
@@ -188,6 +195,7 @@ module Validatable
     #     * times - The number of times the validation applies
     #     * level - The level at which the validation should occur
     #     * if - A block that when executed must return true of the validation will not occur
+    #     * unless - A block that prevents validation when it is true
     #     * group - The group that this validation belongs to.  A validation can belong to multiple groups
     #     * logic - A block that executes to perform the validation
     def validates_true_for(*args)
@@ -220,6 +228,7 @@ module Validatable
     #     * times - The number of times the validation applies
     #     * level - The level at which the validation should occur
     #     * if - A block that when executed must return true of the validation will not occur
+    #     * unless - A block that prevents validation when it is true
     #     * group - The group that this validation belongs to.  A validation can belong to multiple groups
     def validates_associated(*args)
       add_validations(args, ValidatesAssociated)
@@ -285,6 +294,7 @@ module Validatable
     # 
     #     * map - A hash that maps attributes of the child to attributes of the parent.
     #     * if - A block that when executed must return true of the validation will not occur.
+    #     * unless - A block that prevents validation when it is true
     def include_errors_from(attribute_to_validate, options = {})
       children_to_validate << ChildValidation.new(attribute_to_validate, options[:map] || {}, options[:if] || lambda { true })
     end

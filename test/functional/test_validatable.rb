@@ -337,7 +337,61 @@ functional_tests do
     assert !instance.valid?
     assert_equal "can't be empty", instance.errors.on(:name)
   end
-
+  
+  test ':unless with symbol should work' do
+    klass = Class.new do
+      include Validatable
+      attr_accessor :name, :name_optional
+      validates_presence_of :name, :unless => :name_optional?
+      
+      def name_optional?
+        name_optional
+      end
+    end
+    instance = klass.new
+    instance.name_optional = true
+    assert instance.valid?
+    instance.name_optional = false
+    assert !instance.valid?
+    assert_equal "can't be empty", instance.errors.on(:name)
+  end
+  
+  test ':unless with string should work' do
+    klass = Class.new do
+      include Validatable
+      attr_accessor :name, :name_optional
+      validates_presence_of :name, :unless => 'name_optional?'
+      
+      def name_optional?
+        name_optional
+      end
+    end
+    instance = klass.new
+    instance.name_optional = true
+    assert instance.valid?
+    instance.name_optional = false
+    assert !instance.valid?
+    assert_equal "can't be empty", instance.errors.on(:name)
+  end
+  
+  test ':unless with lambda should work' do
+    klass = Class.new do
+      include Validatable
+      attr_accessor :name, :name_optional
+      validates_presence_of :name, :unless => lambda { |object| object.name_optional? }
+      
+      def name_optional?
+        name_optional
+      end
+    end
+    instance = klass.new
+    instance.name_optional = true
+    assert instance.valid?
+    instance.name_optional = false
+    assert !instance.valid?
+    assert_equal "can't be empty", instance.errors.on(:name)
+  end
+  
   test "classes only have valid_for_* methods for groups that appear in their validations" do
     class_with_group_one = Class.new do
       include Validatable

@@ -39,7 +39,7 @@ module Validatable
     include Understandable
     include Requireable
     
-    option :message, :if, :times, :level, :groups, :key, :after_validate, :allow_nil, :allow_blank
+    option :message, :if, :unless, :times, :level, :groups, :key, :after_validate, :allow_nil, :allow_blank
     default :level => 1, :groups => []
     attr_accessor :attribute
     
@@ -63,12 +63,21 @@ module Validatable
     
     def should_validate?(instance)
       result = validate_this_time?(instance)
+      
       case self.if
         when Proc
           result &&= instance.instance_eval(&self.if)
         when Symbol, String
           result &&= instance.instance_eval(self.if.to_s)
       end
+
+      case self.unless
+        when Proc
+          result &&= !instance.instance_eval(&self.unless)
+        when Symbol, String
+          result &&= !instance.instance_eval(self.unless.to_s)
+      end
+      
       result
     end
     
