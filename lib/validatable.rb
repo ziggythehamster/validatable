@@ -1,5 +1,7 @@
 # gem 'activesupport', '2.3.5'
 
+$LOAD_PATH << "./lib"
+
 begin
   require 'active_support/core_ext/object/blank' # newer versions of active_support (>= 3.0)
 rescue LoadError => e
@@ -28,6 +30,7 @@ require 'validatable/validations/validates_exclusion_of'
 require 'validatable/validations/validates_inclusion_of'
 require 'validatable/validations/validates_each'
 require 'validatable/validations/validates_associated'
+require 'validatable/validations/validates_list_items_in_list'
 
 module Validatable
   Version = '1.8.4'

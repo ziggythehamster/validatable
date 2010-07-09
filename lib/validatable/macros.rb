@@ -210,6 +210,10 @@ module Validatable
       add_validations(args, ValidatesInclusionOf)
     end
 
+    def validates_list_items_in_list(*args)
+      add_validations(args, ValidatesListItemsInList)
+    end
+
     # call-seq: validates_associated(*args)
     #
     # Checks the validity of an associated object or objects and adds a single
