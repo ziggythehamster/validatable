@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'rake'
 
+$LOAD_PATH << "./lib"
 require File.expand_path('../lib/validatable', __FILE__)
 
 require 'jeweler'
@@ -20,7 +21,7 @@ Jeweler::Tasks.new do |gem|
   gem.add_development_dependency('expectations')
 end
 
-Jeweler::GemcutterTasks.new
+#Jeweler::GemcutterTasks.new
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
@@ -30,5 +31,5 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-task :test    => :check_dependencies
+task :test  #=> :check_dependencies
 task :default => :test
