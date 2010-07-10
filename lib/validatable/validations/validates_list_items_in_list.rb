@@ -7,6 +7,7 @@ module Validatable
       value = instance.send(attribute)
       return true if allow_nil && value.nil?
       return true if allow_blank && value.blank?
+      return false if value.nil?
 
       value.each do |val|
       	return false unless list.include?(val)
